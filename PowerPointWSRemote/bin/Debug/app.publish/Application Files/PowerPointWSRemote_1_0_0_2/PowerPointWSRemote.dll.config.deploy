@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <configSections>
+        <sectionGroup name="userSettings" type="System.Configuration.UserSettingsGroup, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" >
+            <section name="PowerPointWSRemote.Properties.Settings" type="System.Configuration.ClientSettingsSection, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" allowExeDefinition="MachineToLocalUser" requirePermission="false" />
+        </sectionGroup>
+        <sectionGroup name="applicationSettings" type="System.Configuration.ApplicationSettingsGroup, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" >
+            <section name="PowerPointWSRemote.Settings" type="System.Configuration.ClientSettingsSection, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false" />
+        </sectionGroup>
+    </configSections>
+    <userSettings>
+        <PowerPointWSRemote.Properties.Settings>
+            <setting name="port" serializeAs="String">
+                <value>80</value>
+            </setting>
+        </PowerPointWSRemote.Properties.Settings>
+    </userSettings>
+    <applicationSettings>
+        <PowerPointWSRemote.Settings>
+            <setting name="port" serializeAs="String">
+                <value>80</value>
+            </setting>
+        </PowerPointWSRemote.Settings>
+    </applicationSettings>
+</configuration>
