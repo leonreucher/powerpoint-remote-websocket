@@ -6,4 +6,4 @@ This plugin is intended to get used by Bitfocus Companion. After installing this
 
 ### Installation
 
-Go to the releases tab and download the latest version. Unzip the downloaded file and run the "installation.bat" script.
+Go to the <a href="https://github.com/leonreucher/powerpoint-remote-websocket/releases" target="_blank">Releases</a> tab and download the latest version. Unzip the downloaded file and run the "installation.bat" script.
