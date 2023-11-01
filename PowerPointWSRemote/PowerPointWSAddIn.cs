@@ -13,6 +13,8 @@ using Microsoft.Office.Interop.PowerPoint;
 using System.Runtime.InteropServices;
 using System.Data;
 using System.IO;
+using Microsoft.Office.Core;
+using System.Diagnostics;
 
 namespace PowerPointWSRemote
 {
@@ -31,7 +33,6 @@ namespace PowerPointWSRemote
             Application.SlideShowNextSlide += OnNextSlide;
             Application.SlideShowBegin += OnSlideShowBegin;
             Application.SlideShowEnd += OnSlideShowEnd;
-            Application.WindowSelectionChange += OnWindowChanged;
         }
 
         private void PowerPointWSAddIn_Shutdown(object sender, System.EventArgs e)
@@ -55,10 +56,6 @@ namespace PowerPointWSRemote
             server.Start();
         }
 
-        private void OnWindowChanged(Selection Sel)
-        {
-            this.SendStatus();
-        }
         private void OnNextSlide(SlideShowWindow Wn)
         {
             this.SendStatus();
@@ -214,6 +211,29 @@ namespace PowerPointWSRemote
             }
             response["totalSlideCount"] = this.GetTotalSlideCount();
             response["currentSlide"] = this.GetCurrentSlide();
+            response["slideNotes"] = null;
+            try
+            {
+                Slide slide = this.Application.ActivePresentation.SlideShowWindow.View.Slide;
+                if (slide.HasNotesPage == MsoTriState.msoTrue)
+                {
+                    SlideRange notesPages = slide.NotesPage;
+                    foreach (PowerPoint.Shape shape in notesPages.Shapes)
+                    {
+                        if (shape.Type == MsoShapeType.msoPlaceholder)
+                        {
+                            if (shape.PlaceholderFormat.Type == PpPlaceholderType.ppPlaceholderBody)
+                            {
+                                response["slideNotes"] = shape.TextFrame.TextRange.Text;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+
+            }
             response["presentationFullPath"] = null;
             response["fileName"] = null;
             try
@@ -226,12 +246,7 @@ namespace PowerPointWSRemote
             
             }
 
-            
-
-
-            string jsonResponse = response.ToString();
-
-            SendWebSocketMessage(jsonResponse);
+            SendWebSocketMessage(response.ToString());
         }
 
 
