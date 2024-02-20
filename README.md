@@ -7,7 +7,10 @@ But of course you can also use this plugin for other purposes.
 
 ### Installation
 
-Go to the <a href="https://github.com/leonreucher/powerpoint-remote-websocket/releases" target="_blank">Releases</a> tab and download the latest version. Unzip the downloaded file and run the "installation.bat" script.
+Go to the <a href="https://github.com/leonreucher/powerpoint-remote-websocket/releases" target="_blank">Releases</a> tab and download the latest version. 
+After download the zip archive, make sure to right click the object and go to the file properties. In this window at the bottom check "Unblock" (otherwise you will get errors during the installation).
+
+The last step is to unzip the downloaded file and to run the "installation.bat" script - now just follow the installer instructions.
 
 ### WebSocket API documentation
 
