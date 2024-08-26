@@ -37,6 +37,7 @@
             this.tab1 = this.Factory.CreateRibbonTab();
             this.group1 = this.Factory.CreateRibbonGroup();
             this.txtPort = this.Factory.CreateRibbonEditBox();
+            this.cbEnabled = this.Factory.CreateRibbonCheckBox();
             this.tab1.SuspendLayout();
             this.group1.SuspendLayout();
             this.SuspendLayout();
@@ -50,6 +51,7 @@
             // 
             // group1
             // 
+            this.group1.Items.Add(this.cbEnabled);
             this.group1.Items.Add(this.txtPort);
             this.group1.Label = "Settings";
             this.group1.Name = "group1";
@@ -60,6 +62,12 @@
             this.txtPort.Name = "txtPort";
             this.txtPort.Text = global::PowerPointWSRemote.Properties.Settings.Default.port;
             this.txtPort.TextChanged += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.txtPort_TextChanged);
+            // 
+            // cbEnabled
+            // 
+            this.cbEnabled.Label = "Enable";
+            this.cbEnabled.Name = "cbEnabled";
+            this.cbEnabled.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.cbEnabled_Click);
             // 
             // Ribbon1
             // 
@@ -80,6 +88,7 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonTab tab1;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup group1;
         internal Microsoft.Office.Tools.Ribbon.RibbonEditBox txtPort;
+        internal Microsoft.Office.Tools.Ribbon.RibbonCheckBox cbEnabled;
     }
 
     partial class ThisRibbonCollection

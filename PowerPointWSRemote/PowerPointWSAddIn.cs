@@ -15,6 +15,7 @@ using System.Data;
 using System.IO;
 using Microsoft.Office.Core;
 using System.Diagnostics;
+using Shape = Microsoft.Office.Interop.PowerPoint.Shape;
 
 namespace PowerPointWSRemote
 {
@@ -45,11 +46,12 @@ namespace PowerPointWSRemote
 
         public void Setup()
         {
-            if(server != null)
+            if (server != null)
             {
                 server.Stop();
                 server = null;
             }
+            if (Properties.Settings.Default.enabled == false) return; 
             int port = int.Parse(Properties.Settings.Default.port);
             server = new WebSocketServer(port);
             server.AddWebSocketService<WebSocketHandler>("/ws");
@@ -72,6 +74,53 @@ namespace PowerPointWSRemote
             this.SendStatus();
         }
 
+        public enum MediaControlFunction
+        {
+            PLAY,
+            PAUSE,
+            STOP
+        }
+
+
+
+        public List<Shape> GetCurrentSlideMediaShapes()
+        {
+            if (Application.Presentations.Count == 0) return null;
+            if (Application.ActivePresentation == null) return null;
+
+
+            List<Shape> mediaShapes = new List<Shape>();
+
+            try
+            {
+                foreach (Shape shape in this.Application.ActivePresentation.SlideShowWindow.View.Slide.Shapes)
+                {
+                    if (shape.Type == MsoShapeType.msoMedia)
+                    {
+                        if (shape.MediaType == PpMediaType.ppMediaTypeMovie || shape.MediaType == PpMediaType.ppMediaTypeSound)
+                        {
+                            mediaShapes.Add(shape);
+                        }
+                    }
+                }
+                if (mediaShapes.Count > 0)
+                {
+                    return mediaShapes;
+                }
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+
+
+            return null;
+        }
+
+       
+
+        
+
         public void BeginPresentation()
         {
             if (Application.Presentations.Count == 0) return;
@@ -83,42 +132,101 @@ namespace PowerPointWSRemote
 
         public void EndPresentation()
         {
+            ;
             if (Application.Presentations.Count == 0) return;
             if (Application.SlideShowWindows.Count == 0) return;
             Application.SlideShowWindows[1].View.Exit();
         }
 
+
+
         public void OpenPresentation(string path, bool closeOthers)
         {
-            if(closeOthers)
+            string fullPath = Path.GetFullPath(path);
+
+            Presentation existingPresentation = null;
+
+            // Check if the presentation is already open
+            foreach (Presentation pres in Application.Presentations)
+            {
+                if (string.Equals(pres.FullName, fullPath, StringComparison.OrdinalIgnoreCase))
+                {
+                    existingPresentation = pres;
+                    break;
+                }
+            }
+
+            // If the presentation is already open
+            if (existingPresentation != null)
+            {
+                if (closeOthers)
+                {
+                    foreach (Presentation pres in Application.Presentations)
+                    {
+                        // Close all presentations except the already open one
+                        if (pres != existingPresentation)
+                        {
+                            pres.Close();
+                        }
+                    }
+                }
+
+                // Activate the window with the already open presentation
+                foreach (DocumentWindow window in Application.Windows)
+                {
+                    if (window.Presentation == existingPresentation)
+                    {
+                        window.Activate();
+                        return;
+                    }
+                }
+
+                // If no window was found for the presentation, activate the first window (fallback)
+                if (Application.Windows.Count > 0)
+                {
+                    Application.Windows[1].Activate();
+                }
+                return;
+            }
+
+            // If the presentation was not found, open it
+            if (closeOthers)
             {
                 this.CloseAllPresentations();
             }
-            
+
             try
             {
-                Application.Presentations.Open(@path);
-
+                Application.Presentations.Open(fullPath);
             }
-            catch(FileNotFoundException e)
+            catch (Exception)
             {
-                this.SendWebSocketMessage("File not found");
+
             }
         }
 
+
+
         public void CloseAllPresentations()
         {
-            foreach (Presentation pres in Application.Presentations)
-            {
-                pres.Close();
-            }
-            try
-            {
-                Application.ActivePresentation.Close();
-            }
-            catch (Exception e)
-            {
+            var presentations = Application.Presentations;
 
+            var presentationsToClose = new List<Presentation>();
+
+            foreach (Presentation presentation in presentations)
+            {
+                presentationsToClose.Add(presentation);
+            }
+
+            foreach (Presentation presentation in presentationsToClose)
+            {
+                try
+                {
+                    presentation.Close();
+                }
+                catch (Exception)
+                {
+                }
             }
         }
 
@@ -151,6 +259,7 @@ namespace PowerPointWSRemote
             try
             {
                 Application.ActivePresentation.SlideShowWindow.View.GotoSlide(slideNumber);
+
             }
             catch (COMException)
             {
@@ -172,6 +281,7 @@ namespace PowerPointWSRemote
 
             return result;
         }
+        
         public int GetTotalSlideCount()
         {
             int result = 0;
@@ -185,6 +295,105 @@ namespace PowerPointWSRemote
             }
 
             return result;
+        }
+
+        public void EraseDrawings()
+        {
+            try
+            {
+                Application.ActivePresentation.SlideShowWindow.View.EraseDrawing();
+
+            }
+            catch (COMException)
+            {
+
+            }
+        }
+
+        
+
+        public void ToggleLaserPointer(MsoTriState option)
+        {
+            try
+            {
+                if(option == MsoTriState.msoTriStateToggle)
+                {
+                    if (((dynamic)Application.ActivePresentation.SlideShowWindow.View).LaserPointerEnabled == true)
+                        
+                    {
+                        ((dynamic)Application.ActivePresentation.SlideShowWindow.View).LaserPointerEnabled = false;
+                    }
+                    else
+                    {
+                        ((dynamic)Application.ActivePresentation.SlideShowWindow.View).LaserPointerEnabled = true;
+                    }
+                    return;
+                }
+                ((dynamic)Application.ActivePresentation.SlideShowWindow.View).LaserPointerEnabled = option;
+            }
+            catch (COMException)
+            {
+
+            }
+        }
+
+        public void BlackOutPresentation(PpSlideShowState blackoutOption)
+        {
+            try
+            {
+                Application.ActivePresentation.SlideShowWindow.View.State = blackoutOption;
+            }
+            catch (COMException)
+            {
+
+            }
+        }
+
+        public void HideSlide(int slideId)
+        {
+            try
+            {
+                Application.ActivePresentation.Slides[slideId].SlideShowTransition.Hidden = MsoTriState.msoTrue;
+            }
+            catch (COMException)
+            {
+              
+            }
+        }
+        public void UnhideSlide(int slideId)
+        {
+            try
+            {
+                Application.ActivePresentation.Slides[slideId].SlideShowTransition.Hidden = MsoTriState.msoFalse;
+            }
+            catch (COMException)
+            {
+
+            }
+        }
+
+        public void UnhideAllSlides()
+        {
+            try
+            {
+                // Ensure there's an active presentation
+                if (this.Application.ActivePresentation != null)
+                {
+                    // Get the collection of slides in the active presentation
+                    Slides slides = this.Application.ActivePresentation.Slides;
+
+                    // Iterate through all slides
+                    foreach (Slide slide in slides)
+                    {
+                        // Unhide the slide
+                        slide.SlideShowTransition.Hidden = MsoTriState.msoFalse;
+                    }
+                }
+            }
+            catch (COMException)
+            {
+
+            }
         }
 
 
@@ -204,13 +413,16 @@ namespace PowerPointWSRemote
             {
 
             }
-            if(this.slideShowClosedFlag)
+            if (this.slideShowClosedFlag)
             {
                 response["slideShowActive"] = false;
                 this.slideShowClosedFlag = false;
             }
             response["totalSlideCount"] = this.GetTotalSlideCount();
             response["currentSlide"] = this.GetCurrentSlide();
+            List<Shape> currentSlideShapes = this.GetCurrentSlideMediaShapes();
+            if (currentSlideShapes != null) response["currentSlideMediaCount"] = currentSlideShapes.Count;
+            else response["currentSlideMediaCount"] = 0;
             response["slideNotes"] = null;
             try
             {
@@ -242,8 +454,8 @@ namespace PowerPointWSRemote
                 response["fileName"] = Application.ActivePresentation.Name;
             }
             catch (Exception e)
-            { 
-            
+            {
+
             }
 
             SendWebSocketMessage(response.ToString());
@@ -279,7 +491,7 @@ namespace PowerPointWSRemote
                 {
                     JObject jsonObject = JObject.Parse(receivedMessage);
 
-                    if(jsonObject["slideShowActive"] != null)
+                    if (jsonObject["slideShowActive"] != null)
                     {
                         bool slideShowActiveState = bool.Parse(jsonObject["slideShowActive"].ToString());
                         if (slideShowActiveState == true)
@@ -302,15 +514,15 @@ namespace PowerPointWSRemote
                     if (jsonObject["action"] != null)
                     {
                         string action = jsonObject["action"].ToString();
-                        if(action == "next")
+                        if (action == "next")
                         {
                             PowerPointWSAddIn.instance.NextSlide();
                         }
-                        else if(action == "previous")
+                        else if (action == "previous")
                         {
                             PowerPointWSAddIn.instance.PrevSlide();
                         }
-                        else if(action == "first")
+                        else if (action == "first")
                         {
                             PowerPointWSAddIn.instance.GoToSlide(1);
                         }
@@ -345,8 +557,64 @@ namespace PowerPointWSRemote
                                 }
                                 string path = jsonObject["path"].ToString();
                                 PowerPointWSAddIn.instance.OpenPresentation(path, closeOthers);
+                             
                             }
                             PowerPointWSAddIn.instance.SendStatus();
+                        }
+                        
+                        else if (action == "blackout")
+                        {
+                            PowerPointWSAddIn.instance.BlackOutPresentation(PpSlideShowState.ppSlideShowBlackScreen);
+                        }
+                        else if (action == "whiteout")
+                        {
+                            PowerPointWSAddIn.instance.BlackOutPresentation(PpSlideShowState.ppSlideShowWhiteScreen);
+                        }
+                        else if (action == "showPresentation")
+                        {
+                            PowerPointWSAddIn.instance.BlackOutPresentation(PpSlideShowState.ppSlideShowRunning);
+                        }
+                        else if (action == "hideSlide")
+                        {
+                            if (jsonObject["slideId"] != null)
+                            {
+                                int slideId;
+                                if (int.TryParse(jsonObject["slideId"].ToString(), out slideId) && slideId >= 0)
+                                {
+                                    PowerPointWSAddIn.instance.HideSlide(slideId);
+                                }
+                            }
+                        }
+                        else if (action == "unhideSlide")
+                        {
+                            if (jsonObject["slideId"] != null)
+                            {
+                                int slideId;
+                                if (int.TryParse(jsonObject["slideId"].ToString(), out slideId) && slideId >= 0)
+                                {
+                                    PowerPointWSAddIn.instance.UnhideSlide(slideId);
+                                }
+                            }
+                        }
+                        else if (action == "unhideAllSlides")
+                        {
+                            PowerPointWSAddIn.instance.UnhideAllSlides();
+                        }
+                        else if (action == "showLaserPointer")
+                        {
+                            PowerPointWSAddIn.instance.ToggleLaserPointer(MsoTriState.msoTrue);
+                        }
+                        else if (action == "hideLaserPointer")
+                        {
+                            PowerPointWSAddIn.instance.ToggleLaserPointer(MsoTriState.msoFalse);
+                        }
+                        else if (action == "toggleLaserPointer")
+                        {
+                            PowerPointWSAddIn.instance.ToggleLaserPointer(MsoTriState.msoTriStateToggle);
+                        }
+                        else if (action == "eraseDrawings")
+                        {
+                            PowerPointWSAddIn.instance.EraseDrawings();
                         }
                     }
                 }
@@ -368,7 +636,7 @@ namespace PowerPointWSRemote
             this.Startup += new System.EventHandler(PowerPointWSAddIn_Startup);
             this.Shutdown += new System.EventHandler(PowerPointWSAddIn_Shutdown);
         }
-        
+
         #endregion
     }
 }

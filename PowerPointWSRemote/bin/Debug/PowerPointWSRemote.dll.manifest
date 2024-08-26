@@ -14,16 +14,16 @@
       </applicationRequestMinimum>
       <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
         <!--
-          UAC Manifest Options
-          If you want to change the Windows User Account Control level replace the
-          requestedExecutionLevel node with one of the following.
+          UAC-Manifestoptionen
+          Wenn Sie die Zugangsebene für das Windows-Benutzerkonto ändern möchten, ersetzen Sie den 
+          requestedExecutionLevel-Knoten durch eines der folgenden Elemente.
 
         <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
         <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
         <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
 
-         If you want to utilize File and Registry Virtualization for backward
-         compatibility then delete the requestedExecutionLevel node.
+         Löschen Sie den requestedExecutionLevel-Knoten, wenn Sie 
+         zum Gewährleisten der Abwärtskompatibilität die Datei- und Registrierungsvirtualisierung verwenden möchten.
     -->
         <requestedExecutionLevel level="asInvoker" uiAccess="false" />
       </requestedPrivileges>
@@ -156,14 +156,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PowerPointWSRemote.dll" size="26624">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PowerPointWSRemote.dll" size="33792">
       <assemblyIdentity name="PowerPointWSRemote" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>pEPRX/H4vvT7HM9qXVAj+x1dwAdyndi10XFVGIdL244=</dsig:DigestValue>
+        <dsig:DigestValue>QMq9WobPCsJfWSSOKNq6ogkxMm5oD/+NVl4bnWfv1m4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -179,13 +179,13 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="PowerPointWSRemote.dll.config" size="1497">
+  <file name="PowerPointWSRemote.dll.config" size="1617">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>iPEPQ7XqXw+lopaafZC3JRRGsigHtyynKekdBVMNlX4=</dsig:DigestValue>
+      <dsig:DigestValue>VJiJ5KKx6irFk32UUchXLYb8dkHW6Q5PVt50ow4btOs=</dsig:DigestValue>
     </hash>
   </file>
   <vstav3:addIn xmlns:vstav3="urn:schemas-microsoft-com:vsta.v3">
@@ -213,4 +213,4 @@
       </vstov4:customizations>
     </vstav3:application>
   </vstav3:addIn>
-<publisherIdentity name="CN=WW930\A703861" issuerKeyHash="11840c6ac7efc8be1db065340fc02726c3953ffe" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>ubRaN4nRxNnMBSokbINzQoSPZ69Id0v+rqw2IhG6cN8=</DigestValue></Reference></SignedInfo><SignatureValue>HiRi+t1RmAI6XnB8QEdFj/p1xQIuIwb9pErjbj9qciQO/nKg6Qera5/yWS7AbjITH23sYi/snpUBoVKy5QnAVrUc8OzT/J9l++ZoI5X9sfG2P9OP20ioaCwU9GJAEI/RGxL2+jQMZ5ghk8CDgiapRLidbDLBkingzrN53Ea88OM=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>1TIHrKcS2xsmHXxSw60FeYqmfsgQUg5feEzQD/KMIsrj2QERzgEXNySZGgtgeP80sUC4h6aNyuqimhdLnI5Nmb5k9Xx3Y67E65inVtZSd0DqvhSn387wvtgKWn5WhXuVZxIMIIoYOmRJEBbQ/zq99vSt7C4VNEKisPN8VHr6myU=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="df70ba112236acaefe4b7748af678f844273836c242a05ccd9c4d189375ab4b9" Description="" Url=""><as:assemblyIdentity name="PowerPointWSRemote.dll" version="1.0.0.1" publicKeyToken="d2699515ba5ac084" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=WW930\A703861</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>ZQn+1wH6Gq/HrAokb8FfgY62K+pS9RXVvgH9CMdHKq8=</DigestValue></Reference></SignedInfo><SignatureValue>LhMVO0nvqOVo+NcgOin5RmRZwLsEahr8pw3/plolTcC2vq3S2P2ZQscK5ZhqagkvgzvsU/8uDVLCdvrAP+ybdP8QycWN2UAKNa2cvFzFUn6k0UkoPT5kd4/cXpwkKbR6z+CCAc9z26jwHg5ljls7zlpIf1crt6t7Ch3qPrF48CY=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>1TIHrKcS2xsmHXxSw60FeYqmfsgQUg5feEzQD/KMIsrj2QERzgEXNySZGgtgeP80sUC4h6aNyuqimhdLnI5Nmb5k9Xx3Y67E65inVtZSd0DqvhSn387wvtgKWn5WhXuVZxIMIIoYOmRJEBbQ/zq99vSt7C4VNEKisPN8VHr6myU=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIBzTCCATagAwIBAgIQYmeIZ+lXK4BHYU0mCXgxBDANBgkqhkiG9w0BAQsFADAlMSMwIQYDVQQDHhoAVwBXADkAMwAwAFwAQQA3ADAAMwA4ADYAMTAeFw0yMzA5MDcwOTEyNTBaFw0yNDA5MDYxNTEyNTBaMCUxIzAhBgNVBAMeGgBXAFcAOQAzADAAXABBADcAMAAzADgANgAxMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDVMgespxLbGyYdfFLDrQV5iqZ+yBBSDl94TNAP8owiyuPZARHOARc3JJkaC2B4/zSxQLiHpo3K6qKaF0ucjk2ZvmT1fHdjrsTrmKdW1lJ3QOq+FKffzvC+2ApaflaFe5VnEgwgihg6ZEkQFtD/Or329K3sLhU0QqKw83xUevqbJQIDAQABMA0GCSqGSIb3DQEBCwUAA4GBAIpSRkQSukcuDeHF5iD2jeoaU9Tt5mxT6ycaehPpuCHR2+jNJAJQsnI0oZBExB/FwJZ/zajLEY5QEFk3hIVK2Nvn9GJ2cSGkAjZyu54Qf6bWCcgawKjb9aU38LtKpyVzVEL/qwn27VjuME0wIvvYGGraSPH0sPM89urHi5RRMczE</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>
+<publisherIdentity name="CN=WW930\A703861" issuerKeyHash="11840c6ac7efc8be1db065340fc02726c3953ffe" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>W0TGHibZ929AGm6zVJG/dyWu3czDUxdoTJi+X1q33Bc=</DigestValue></Reference></SignedInfo><SignatureValue>meGguAEktU3L9Qyxe0+2cFr7b2Zhlk1U/Ke4k/QF14f2pZ6zHfubtqBbBR88YwiJjaVIvL5DeUaay+Ar/XSsYbJRpftifQR08WHJbAWTl4IGyTA+2PkrU9YGDW9cAtRtOBbzlciAH42Rvt+9aBiLqiLYun3joCCT063UBh0EREc=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>1TIHrKcS2xsmHXxSw60FeYqmfsgQUg5feEzQD/KMIsrj2QERzgEXNySZGgtgeP80sUC4h6aNyuqimhdLnI5Nmb5k9Xx3Y67E65inVtZSd0DqvhSn387wvtgKWn5WhXuVZxIMIIoYOmRJEBbQ/zq99vSt7C4VNEKisPN8VHr6myU=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="17dcb75a5fbe984c681753c3ccddae2577bf9154b36e1a406ff7d9261ec6445b" Description="" Url=""><as:assemblyIdentity name="PowerPointWSRemote.dll" version="1.0.0.1" publicKeyToken="d2699515ba5ac084" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=WW930\A703861</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>DN1FiXewZsySripn+9V//Sg5wyZq8Pv1jCx602yL6HE=</DigestValue></Reference></SignedInfo><SignatureValue>YB55kp0sb9S/qOqxDEc6mga7wQFD2mkwNlCl32mQM0LUGxChVJAZRHd9VgtFRVlZ9My/svbQwow82Hsf2KEyOnJQeg4FF9x6TZoNkj+831/1pYn+OhJkSaqyReosk1PQjZOXGajVLd/2aioaBxzR81iUxljGfpyM6hQoJ0MjBA0=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>1TIHrKcS2xsmHXxSw60FeYqmfsgQUg5feEzQD/KMIsrj2QERzgEXNySZGgtgeP80sUC4h6aNyuqimhdLnI5Nmb5k9Xx3Y67E65inVtZSd0DqvhSn387wvtgKWn5WhXuVZxIMIIoYOmRJEBbQ/zq99vSt7C4VNEKisPN8VHr6myU=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIBzTCCATagAwIBAgIQYmeIZ+lXK4BHYU0mCXgxBDANBgkqhkiG9w0BAQsFADAlMSMwIQYDVQQDHhoAVwBXADkAMwAwAFwAQQA3ADAAMwA4ADYAMTAeFw0yMzA5MDcwOTEyNTBaFw0yNDA5MDYxNTEyNTBaMCUxIzAhBgNVBAMeGgBXAFcAOQAzADAAXABBADcAMAAzADgANgAxMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDVMgespxLbGyYdfFLDrQV5iqZ+yBBSDl94TNAP8owiyuPZARHOARc3JJkaC2B4/zSxQLiHpo3K6qKaF0ucjk2ZvmT1fHdjrsTrmKdW1lJ3QOq+FKffzvC+2ApaflaFe5VnEgwgihg6ZEkQFtD/Or329K3sLhU0QqKw83xUevqbJQIDAQABMA0GCSqGSIb3DQEBCwUAA4GBAIpSRkQSukcuDeHF5iD2jeoaU9Tt5mxT6ycaehPpuCHR2+jNJAJQsnI0oZBExB/FwJZ/zajLEY5QEFk3hIVK2Nvn9GJ2cSGkAjZyu54Qf6bWCcgawKjb9aU38LtKpyVzVEL/qwn27VjuME0wIvvYGGraSPH0sPM89urHi5RRMczE</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>

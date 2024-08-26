@@ -19,5 +19,12 @@ namespace PowerPointWSRemote
             Properties.Settings.Default.Save();
             PowerPointWSAddIn.instance.Setup();
         }
+
+        private void cbEnabled_Click(object sender, RibbonControlEventArgs e)
+        {
+            Properties.Settings.Default.enabled = cbEnabled.Checked;
+            Properties.Settings.Default.Save();
+            PowerPointWSAddIn.instance.Setup();
+        }
     }
 }

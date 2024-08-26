@@ -191,6 +191,7 @@
     <Compile Include="Ribbon1.Designer.cs">
       <DependentUpon>Ribbon1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Settings.cs" />
     <Compile Include="Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -258,7 +259,7 @@
       <FlavorProperties GUID="{BAA0C2D2-18E2-41B9-852F-F413020CAA33}">
         <ProjectProperties HostName="PowerPoint" HostPackage="{29A7B9D7-A7F1-4328-8EF0-6B2D1A56B2C1}" OfficeVersion="15.0" VstxVersion="4.0" ApplicationType="PowerPoint" Language="cs" TemplatesPath="" DebugInfoExeName="#Software\Microsoft\Office\16.0\PowerPoint\InstallRoot\Path#powerpnt.exe" AddItemTemplatesGuid="{51063C3A-E220-4D12-8922-BDA915ACD783}" />
         <Host Name="PowerPoint" GeneratedCodeNamespace="PowerPointWSRemote" PublishedHash="69C324AB27932AA2FBF2B7EA72250886FF164DE6" IconIndex="0">
-          <HostItem Name="ThisAddIn" Code="PowerPointWSAddIn.cs" CanonicalName="AddIn" CanActivate="false" IconIndex="1" Blueprint="PowerPointWSAddIn.Designer.xml" GeneratedCode="PowerPointWSAddIn.Designer.cs" PublishedHash="7E58C63E524D5188A762A013A9135128D9820650" />
+          <HostItem Name="ThisAddIn" Code="PowerPointWSAddIn.cs" CanonicalName="AddIn" PublishedHash="7E58C63E524D5188A762A013A9135128D9820650" CanActivate="false" IconIndex="1" Blueprint="PowerPointWSAddIn.Designer.xml" GeneratedCode="PowerPointWSAddIn.Designer.cs" />
         </Host>
       </FlavorProperties>
     </VisualStudio>

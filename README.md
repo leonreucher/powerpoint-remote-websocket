@@ -78,3 +78,65 @@ Go to previous slide:
   "action": "previous"
 }
 ```
+Blackout Presentation screen:
+```json
+{
+  "action": "blackout"
+}
+```
+Whiteout Presentation screen:
+```json
+{
+  "action": "whiteout"
+}
+```
+Show Presentation again after black-/whiteout:
+```json
+{
+  "action": "showPresentation"
+}
+```
+Hide slide:
+```json
+{
+  "action": "hideSlide",
+  "slideId": 1
+}
+```
+Unhide slide:
+```json
+{
+  "action": "unhideSlide",
+  "slideId": 1
+}
+```
+Unhide all slides:
+```json
+{
+  "action": "unhideAllSlides"
+}
+```
+Show laser pointer:
+```json
+{
+  "action": "showLaserPointer"
+}
+```
+Hide laser pointer:
+```json
+{
+  "action": "hideLaserPointer"
+}
+```
+Toggle laser pointer:
+```json
+{
+  "action": "toggleLaserPointer"
+}
+```
+Erase drawings on active slide:
+```json
+{
+  "action": "eraseDrawings"
+}
+```
